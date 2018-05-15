@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">newLoginAndRegDiplom</string>
+
+
+    <string name="app_reg">Registration</string>
+    <string name="app_login">Login</string>
+    <string name="register_text">You are welcomed by the registration field.</string>
+    <string name="login_text">You are welcomed by the login field.</string>
+    <string name="activity_user__text">Congratulations!</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="btn_reg">Registration</string>
+    <string name="btn_login">Sing in</string>
+    <string name="btn_regHere">Go to reg</string>
+</resources>
