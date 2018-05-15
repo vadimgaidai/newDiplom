@@ -38,21 +38,28 @@ public class Register extends Activity {
         Name = name.getText().toString();
         Password = password.getText().toString();
 
-
         if (Name.length() == 0 | Password.length() == 0) {
             Toast.makeText(getApplicationContext(), "Заполните все поля ввода",
                     Toast.LENGTH_LONG).show();
             return;
 
-        }else{
+        }
+        if (Name.length() <= 2) {
+            Toast.makeText(getApplicationContext(), "Username должен состоять как минимум из 3 символов",
+                    Toast.LENGTH_LONG).show();
+            return;
+
+        }
+        if (Password.length() <= 4) {
+            Toast.makeText(getApplicationContext(), "Password должен состоять как минимум из 5 символов",
+                    Toast.LENGTH_LONG).show();
+            return;
+
+        }
+        else{
             BackGround b = new BackGround();
             b.execute(Name, Password);
         }
-
-
-
-
-
 
     }
 
