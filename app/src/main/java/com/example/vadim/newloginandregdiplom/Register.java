@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,14 +29,31 @@ public class Register extends Activity {
         setContentView(R.layout.register);
         name = (EditText) findViewById(R.id.etUsername);
         password = (EditText) findViewById(R.id.etPassword);
+
+
     }
 
 
     public void signOut(View view){
         Name = name.getText().toString();
         Password = password.getText().toString();
-        BackGround b = new BackGround();
-        b.execute(Name, Password);
+
+
+        if (Name.length() == 0 | Password.length() == 0) {
+            Toast.makeText(getApplicationContext(), "Заполните все поля ввода",
+                    Toast.LENGTH_LONG).show();
+            return;
+
+        }else{
+            BackGround b = new BackGround();
+            b.execute(Name, Password);
+        }
+
+
+
+
+
+
     }
 
 
@@ -73,17 +91,17 @@ public class Register extends Activity {
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                return "Exception: "+e.getMessage();
+                return "Ошибка: "+e.getMessage();
             } catch (IOException e) {
                 e.printStackTrace();
-                return "Exception: "+e.getMessage();
+                return "Ошибка: "+e.getMessage();
             }
         }
 
         @Override
         protected void onPostExecute(String s) {
             if(s.equals("")){
-                s="Data saved successfully.";
+                s="Регистрация прошла успешно.";
             }
             Toast.makeText(ctx, s, Toast.LENGTH_LONG).show();
         }

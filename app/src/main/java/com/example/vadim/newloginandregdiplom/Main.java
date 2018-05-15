@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,15 +41,19 @@ public class Main extends Activity {
     public void signIn (View view){
         Name = name.getText().toString();
         Password = password.getText().toString();
-        BackGround b = new BackGround();
-        b.execute(Name, Password);
+
+
+        if (Name.length() == 0 | Password.length() == 0) {
+            Toast.makeText(getApplicationContext(), "Заполните все поля ввода",
+                    Toast.LENGTH_LONG).show();
+            return;
+
+        }else{
+            BackGround b = new BackGround();
+            b.execute(Name, Password);
+        }
+
     }
-    /*public void signIn (View v){
-        Name = name.getText().toString();
-        Password = password.getText().toString();
-        BackGround b = new BackGround();
-        b.execute(Name, Password);
-    }*/
 
 
 
@@ -83,10 +88,10 @@ public class Main extends Activity {
                 return data;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                return "Exception: "+e.getMessage();
+                return "Ошибка: "+e.getMessage();
             } catch (IOException e) {
                 e.printStackTrace();
-                return "Exception: "+e.getMessage();
+                return "Ошибка: "+e.getMessage();
             }
         }
 
