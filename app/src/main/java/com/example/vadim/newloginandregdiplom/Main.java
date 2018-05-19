@@ -1,6 +1,7 @@
 package com.example.vadim.newloginandregdiplom;
 
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -18,6 +19,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class Main extends Activity {
 
@@ -123,8 +125,8 @@ public class Main extends Activity {
                 PASSWORD = user_data.getString("password");
 
 
-                Intent intent = new Intent(Main.this, Home.class);
-                Main.this.startActivity(intent);
+               /* Intent intent = new Intent(Main.this, Home.class);
+                Main.this.startActivity(intent);*/
 
 
 
@@ -135,7 +137,8 @@ public class Main extends Activity {
 
             }
 
-
+            Intent intent = new Intent(Main.this, Home.class);
+            Main.this.startActivity(intent);
 
 
         }

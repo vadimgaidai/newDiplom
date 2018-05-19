@@ -7,6 +7,15 @@
     <string name="register_text">You are welcomed by the registration field.</string>
     <string name="login_text">You are welcomed by the login field.</string>
     <string name="activity_user__text">Congratulations!</string>
+
+
+    <string name="home_text">Вас приветствует какой-то тест, я еще не придумал какой:( Тут тип инфа, что мы здоровенная команда разработчиков
+        и все такое, короче кликай на кнопку, что бы перейти к тестированию.</string>
+
+
+    <string name="btn_home">GO!</string>
+
+
     <string name="email">Email</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
