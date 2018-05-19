@@ -10,7 +10,7 @@ import android.widget.TextView;
 public class Home extends Activity {
 
     String name, password, Err;
-    TextView nameTV, passwordTV, err;
+    TextView nameTV, err;
 
 
     public void onClick(View view){
@@ -27,20 +27,15 @@ public class Home extends Activity {
 
 
         nameTV = (TextView) findViewById(R.id.tvName);
-        //emailTV = (TextView) findViewById(R.id.tvEmail);
-        //passwordTV = (TextView) findViewById(R.id.tvPassword);
         err = (TextView) findViewById(R.id.err);
 
-       /* name = getIntent().getStringExtra("name");
-        password = getIntent().getStringExtra("password");
-       */
+
         name = getIntent().getStringExtra("name");
         password = getIntent().getStringExtra("password");
 
         Err = getIntent().getStringExtra("err");
 
         nameTV.setText("Привет "+name);
-        //passwordTV.setText("Your password is "+password);
         err.setText(Err);
 
 
