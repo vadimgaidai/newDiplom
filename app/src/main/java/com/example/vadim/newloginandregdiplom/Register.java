@@ -77,7 +77,7 @@ public class Register extends Activity {
             try {
 
 
-                URL url = new URL("https://probdip.000webhostapp.com/Register.php");
+                URL url = new URL("https://diplomandroid.000webhostapp.com/Register.php");
                 String urlParams = "name="+name+"&password="+password;
 
 

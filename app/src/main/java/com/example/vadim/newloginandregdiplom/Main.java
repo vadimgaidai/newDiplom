@@ -3,6 +3,9 @@ package com.example.vadim.newloginandregdiplom;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,14 +22,14 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
+
 
 public class Main extends Activity {
 
     EditText name, password;
     String Name, Password;
-    //Context ctx=this;
-    String NAME, PASSWORD, EMAIL;
+    Context ctx=this;
+    String NAME, PASSWORD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +43,13 @@ public class Main extends Activity {
         startActivity(new Intent(this,Register.class));
     }
 
+
+
     public void signIn (View view){
         Name = name.getText().toString();
         Password = password.getText().toString();
+
+
 
 
         if (Name.length() == 0 | Password.length() == 0) {
@@ -74,6 +81,19 @@ public class Main extends Activity {
 
     class BackGround extends AsyncTask<String, String, String> {
 
+        ProgressDialog pdLoading = new ProgressDialog(Main.this);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            //this method will be running on UI thread
+            pdLoading.setMessage("\tLoading...");
+            pdLoading.setCancelable(false);
+            pdLoading.show();
+
+        }
+
         @Override
         protected String doInBackground(String... params) {
             String name = params[0];
@@ -81,8 +101,10 @@ public class Main extends Activity {
             String data="";
             int tmp;
 
+
+
             try {
-                URL url = new URL("https://probdip.000webhostapp.com//Login.php");
+                URL url = new URL("https://diplomandroid.000webhostapp.com/Login.php");
                 String urlParams = "name="+name+"&password="+password;
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -113,32 +135,36 @@ public class Main extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
+            pdLoading.dismiss();
+
+
+
             try {
                 JSONObject root = new JSONObject(s);
                 JSONObject user_data = root.getJSONObject("user_data");
 
 
-
-
-
                 NAME = user_data.getString("name");
                 PASSWORD = user_data.getString("password");
 
+                Intent i = new Intent(ctx, Home.class);
+                i.putExtra("name", NAME);
+                i.putExtra("password", PASSWORD);
 
-               /* Intent intent = new Intent(Main.this, Home.class);
-                Main.this.startActivity(intent);*/
-
-
-
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
+                startActivity(i);
 
             }
 
-            Intent intent = new Intent(Main.this, Home.class);
-            Main.this.startActivity(intent);
+            catch (JSONException e) {
+                e.printStackTrace();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
+                builder.setMessage("Неправильный логин или пароль")
+                        .setNegativeButton("Retry", null)
+                        .create()
+                        .show();
+
+            }
 
 
         }

@@ -34,6 +34,10 @@ public class Home extends Activity {
        /* name = getIntent().getStringExtra("name");
         password = getIntent().getStringExtra("password");
        */
+        name = getIntent().getStringExtra("name");
+        password = getIntent().getStringExtra("password");
+
+        Err = getIntent().getStringExtra("err");
 
         nameTV.setText("Привет "+name);
         //passwordTV.setText("Your password is "+password);
