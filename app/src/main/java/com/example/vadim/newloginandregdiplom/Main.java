@@ -48,10 +48,17 @@ public class Main extends Activity {
     public void signIn (View view){
         Name = name.getText().toString();
         Password = password.getText().toString();
+        if (Name.length() == 0 | Password.length() == 0) {
+            Toast.makeText(getApplicationContext(), "Заполните все поля ввода",
+                    Toast.LENGTH_LONG).show();
+            return;
+
+        }else{
+            BackGround b = new BackGround();
+            b.execute(Name, Password);
+        }
 
 
-        BackGround b = new BackGround();
-        b.execute(Name, Password);
 
     }
 

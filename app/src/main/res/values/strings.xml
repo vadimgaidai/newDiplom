@@ -1,25 +1,21 @@
 <resources>
-    <string name="app_name">newLoginAndRegDiplom</string>
+    <string name="app_name">Diplom</string>
 
-
-    <string name="app_reg">Registration</string>
-    <string name="app_login">Login</string>
     <string name="register_text">You are welcomed by the registration field.</string>
     <string name="login_text">You are welcomed by the login field.</string>
     <string name="activity_user__text">Congratulations!</string>
 
 
-    <string name="home_text">Вас приветствует какой-то тест, я еще не придумал какой:( Тут тип инфа, что мы здоровенная команда разработчиков
-        и все такое, короче кликай на кнопку, что бы перейти к тестированию.</string>
+    <string name="home_text">Текст описания приложения</string>
 
 
     <string name="btn_home">GO!</string>
-
+    <string name="result">Результат прохождения теста</string>
 
     <string name="email">Email</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="btn_reg">Registration</string>
-    <string name="btn_login">Sing in</string>
-    <string name="btn_regHere">Go to reg</string>
+    <string name="btn_reg">Sign Up</string>
+    <string name="btn_login">Sign In</string>
+    <string name="btn_regHere">Go to registration</string>
 </resources>

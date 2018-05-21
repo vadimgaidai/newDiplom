@@ -56,6 +56,13 @@ public class Register extends Activity {
             return;
 
         }
+
+        if (Name.length() >= 16 | Password.length() >= 16) {
+            Toast.makeText(getApplicationContext(), "Значения Password и Username не должны привышать 16 символов",
+                    Toast.LENGTH_LONG).show();
+            return;
+
+        }
         else{
             BackGround b = new BackGround();
             b.execute(Name, Password);
