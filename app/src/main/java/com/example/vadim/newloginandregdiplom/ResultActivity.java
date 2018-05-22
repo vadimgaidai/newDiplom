@@ -13,7 +13,7 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        setContentView(R.layout.result);
 
         TextView resultLabel = (TextView) findViewById(R.id.resultLabel);
         TextView totalScoreLabel = (TextView) findViewById(R.id.totalScoreLabel);
@@ -22,9 +22,12 @@ public class ResultActivity extends AppCompatActivity {
 
         SharedPreferences settings = getSharedPreferences("quizApp", Context.MODE_PRIVATE);
         int totalScore = settings.getInt("totalScore", 0);
+
+
         totalScore += score;
 
         resultLabel.setText(score + " / 10");
+
         totalScoreLabel.setText("Total Score : " + totalScore);
 
         // Update total score.
@@ -37,5 +40,6 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), Test.class);
         startActivity(intent);
     }
+
 
 }

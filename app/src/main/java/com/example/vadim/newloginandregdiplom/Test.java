@@ -115,7 +115,7 @@ public class Test extends AppCompatActivity {
         Button answerBtn = (Button) findViewById(view.getId());
         String btnText = answerBtn.getText().toString();
 
-        String alertTitle;
+
 
         if(btnText.equals(rightAnswer)) {
             rightAnswerCount++;

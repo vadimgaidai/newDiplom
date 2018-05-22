@@ -9,8 +9,11 @@
     <string name="home_text">Текст описания приложения</string>
 
 
-    <string name="btn_home">GO!</string>
+    <string name="btn_home">Начать тест</string>
+    <string name="back_home">Вернуться к описанию</string>
+
     <string name="result">Результат прохождения теста</string>
+    <string name="comback">Начать сначала</string>
 
     <string name="email">Email</string>
     <string name="username">Username</string>
