@@ -13,6 +13,7 @@ public class Home extends Activity {
     TextView nameTV, err;
 
 
+
     public void onClick(View view){
         Intent intent = new Intent(Home.this, Test.class);
         startActivity(intent);
@@ -22,6 +23,7 @@ public class Home extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
 
 
         nameTV = (TextView) findViewById(R.id.tvName);

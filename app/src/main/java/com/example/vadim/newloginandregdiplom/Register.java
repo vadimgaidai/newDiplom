@@ -27,6 +27,7 @@ public class Register extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+
         name = (EditText) findViewById(R.id.etUsername);
         password = (EditText) findViewById(R.id.etPassword);
 
