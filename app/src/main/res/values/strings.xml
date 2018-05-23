@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">Diplom</string>
 
-    <string name="register_text">You are welcomed by the registration field.</string>
-    <string name="login_text">You are welcomed by the login field.</string>
+    <string name="register_text">Создать новый аккаунт</string>
+    <string name="login_text">Войти в существующий аккаунт</string>
     <string name="activity_user__text">Вы успешно авторизовались!</string>
 
 
     <string name="home_text">
         Данное приложение является компонентской частью распределенной системы тестирования знаний!
-        Здесь вы можете испытать свои знания  в области «web-разработки» ответив на 10 вопросов, а так же узнать выходной результат по итогу.
+         В данном вы можете испытать свои знания  в области «web-разработки» ответив на 10 вопросов, а так же узнать выходной результат по итогу.
         Кликайте на кнопку «Начать тест» и да прибудет с вами сила!
     </string>
 
@@ -21,10 +21,10 @@
     <string name="comback">Начать сначала</string>
 
     <string name="email">Email</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="btn_reg">Sign Up</string>
-    <string name="btn_login">Sign In</string>
-    <string name="btn_regHere">Go to registration</string>
+    <string name="username">Имя</string>
+    <string name="password">Пароль</string>
+    <string name="btn_reg">Регистрация</string>
+    <string name="btn_login">Вход</string>
+    <string name="btn_regHere">Регистрация</string>
 
 </resources>
