@@ -24,8 +24,6 @@ public class Home extends Activity {
         setContentView(R.layout.home);
 
 
-
-
         nameTV = (TextView) findViewById(R.id.tvName);
         err = (TextView) findViewById(R.id.err);
 

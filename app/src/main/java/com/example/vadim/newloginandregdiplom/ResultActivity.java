@@ -15,31 +15,34 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result);
 
+
         TextView resultLabel = (TextView) findViewById(R.id.resultLabel);
         TextView totalScoreLabel = (TextView) findViewById(R.id.totalScoreLabel);
 
         int score = getIntent().getIntExtra("RIGHT_ANSWER_COUNT", 0);
 
-        SharedPreferences settings = getSharedPreferences("quizApp", Context.MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences("Diplom", Context.MODE_PRIVATE);
         int totalScore = settings.getInt("totalScore", 0);
 
 
-        totalScore += score;
+        totalScore += score * 10;
 
         resultLabel.setText(score + " / 10");
 
-        totalScoreLabel.setText("Total Score : " + totalScore);
+        totalScoreLabel.setText("Количество баллов: " + totalScore);
 
-        // Update total score.
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putInt("totalScore", totalScore);
-        editor.commit();
+        //Update total score.
+       // SharedPreferences.Editor editor = settings.edit();
+        //editor.putInt("totalScore", totalScore);
+        //editor.commit();
     }
 
     public void returnTop(View view) {
         Intent intent = new Intent(getApplicationContext(), Test.class);
         startActivity(intent);
     }
+
+
 
 
 }

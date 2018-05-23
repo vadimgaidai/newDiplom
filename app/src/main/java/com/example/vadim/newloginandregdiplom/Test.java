@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+
+
+
 public class Test extends AppCompatActivity {
 
     private TextView countLabel;
@@ -29,7 +32,11 @@ public class Test extends AppCompatActivity {
     private int quizCount = 1;
     static final private int QUIZ_COUNT = 10;
 
+
+
+
     ArrayList<ArrayList<String>> quizArray = new ArrayList<>();
+
 
     String quizData[][] = {
             // {"Country", "Right Answer", "Choice1", "Choice2", "Choice3"}
@@ -51,6 +58,8 @@ public class Test extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test);
+
+
 
         countLabel = (TextView)findViewById(R.id.countLabel);
         questionLabel = (TextView)findViewById(R.id.questionLabel);

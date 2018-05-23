@@ -3,14 +3,17 @@
 
     <string name="register_text">You are welcomed by the registration field.</string>
     <string name="login_text">You are welcomed by the login field.</string>
-    <string name="activity_user__text">Congratulations!</string>
+    <string name="activity_user__text">Вы успешно авторизовались!</string>
 
 
-    <string name="home_text">Текст описания приложения</string>
+    <string name="home_text">Данное приложение является компонентской частью распределенной системы тестирования знаний!
+        Здесь вы можете испытать свои знания  в области "web-разработки" ответив на 10 вопросов, а так же узнать выходной результат по итогу.
+        Кликайте на кнопку "Начать тест" и да прибудет с вами сила!</string>
 
 
     <string name="btn_home">Начать тест</string>
     <string name="back_home">Вернуться к описанию</string>
+    <string name="resultTest">Результат</string>
 
     <string name="result">Результат прохождения теста</string>
     <string name="comback">Начать сначала</string>
