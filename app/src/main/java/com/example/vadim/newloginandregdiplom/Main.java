@@ -33,6 +33,9 @@ public class Main extends Activity {
     Context ctx=this;
     String NAME, PASSWORD;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +58,9 @@ public class Main extends Activity {
                     Toast.LENGTH_LONG).show();
             return;
 
-        }else{
-            BackGround b = new BackGround();
+        }else{ BackGround b = new BackGround();
             b.execute(Name, Password);
+
         }
 
 

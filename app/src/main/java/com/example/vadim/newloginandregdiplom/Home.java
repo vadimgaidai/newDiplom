@@ -17,6 +17,12 @@ public class Home extends Activity {
     public void onClick(View view){
         Intent intent = new Intent(Home.this, Test.class);
         startActivity(intent);
+
+
+
+
+
+
     }
 
     @Override

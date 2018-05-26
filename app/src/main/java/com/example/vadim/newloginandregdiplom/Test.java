@@ -1,8 +1,11 @@
 package com.example.vadim.newloginandregdiplom;
 
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -10,6 +13,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import java.util.Collections;
@@ -32,7 +45,64 @@ public class Test extends AppCompatActivity {
     private int quizCount = 1;
     static final private int QUIZ_COUNT = 10;
 
+    public  static TextView data;
 
+
+
+    class BackGround extends AsyncTask<String, String, String> {
+
+        ProgressDialog pdLoading = new ProgressDialog(Test.this);
+
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String data="";
+            int tmp;
+
+            try {
+                URL url = new URL("https://diplomandroid.000webhostapp.com/test.php");
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setDoOutput(true);
+
+                InputStream is = httpURLConnection.getInputStream();
+                while((tmp=is.read())!=-1){
+                    data+= (char)tmp;
+                }
+
+                is.close();
+                httpURLConnection.disconnect();
+
+                return data;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return "Ошибка: "+e.getMessage();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "Ошибка: "+e.getMessage();
+            }
+        }
+
+        @Override
+            protected void onPostExecute(String s) {
+
+
+                try {
+                    JSONArray root = new  JSONArray(s);
+
+
+                    data.setText(s);
+                }
+
+                catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+
+        }
+    }
 
 
     ArrayList<ArrayList<String>> quizArray = new ArrayList<>();
@@ -58,6 +128,14 @@ public class Test extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test);
+
+
+        BackGround b = new BackGround();
+        b.execute();
+
+        data = (TextView)findViewById(R.id.data);
+
+
 
 
 
