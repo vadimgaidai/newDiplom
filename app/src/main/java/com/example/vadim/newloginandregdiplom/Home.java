@@ -19,10 +19,6 @@ public class Home extends Activity {
         startActivity(intent);
 
 
-
-
-
-
     }
 
     @Override
@@ -43,7 +39,6 @@ public class Home extends Activity {
 
         nameTV.setText("Привет "+name);
         err.setText(Err);
-
 
 
     }

@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,17 +18,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+
 import java.net.URL;
+
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import java.util.Collections;
 import java.util.Random;
-
+import java.nio.charset.Charset;
 
 
 
@@ -41,12 +49,29 @@ public class Test extends AppCompatActivity {
     // private Button answerBtn4;
 
     private String rightAnswer;
+
+    private String str = "";
+
     private int rightAnswerCount = 0;
     private int quizCount = 1;
     static final private int QUIZ_COUNT = 10;
 
+    String singleParsed ;
+
     public  static TextView data;
 
+
+
+
+    private final Charset UTF8_CHARSET = Charset.forName("UTF-8");
+
+    String decodeUTF8(byte[] bytes) {
+        return new String(bytes, UTF8_CHARSET);
+    }
+
+    byte[] encodeUTF8(String string) {
+        return string.getBytes(UTF8_CHARSET);
+    }
 
 
     class BackGround extends AsyncTask<String, String, String> {
@@ -56,26 +81,39 @@ public class Test extends AppCompatActivity {
 
 
         @Override
-        protected String doInBackground(String... params) {
+        protected String doInBackground(String ... params) {
 
             String data="";
+
+
             int tmp;
 
             try {
+
+
+              /*  String json = ("https://diplomandroid.000webhostapp.com/test.php") ;
+                final String encodedURL = URLEncoder.encode(json, "UTF-8");
+                URL url = new URL(encodedURL);*/
+
+
+
                 URL url = new URL("https://diplomandroid.000webhostapp.com/test.php");
 
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setDoOutput(true);
 
-                InputStream is = httpURLConnection.getInputStream();
-                while((tmp=is.read())!=-1){
+
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                while((tmp=bufferedReader.read())!=-1){
                     data+= (char)tmp;
                 }
 
-                is.close();
+                bufferedReader.close();
                 httpURLConnection.disconnect();
 
                 return data;
+
             } catch (MalformedURLException e) {
                 e.printStackTrace();
                 return "Ошибка: "+e.getMessage();
@@ -89,11 +127,27 @@ public class Test extends AppCompatActivity {
             protected void onPostExecute(String s) {
 
 
+
+          //  s = URLDecoder.decode(URLEncoder.encode(s, "iso8859-1"),"UTF-8");
+
+
                 try {
-                    JSONArray root = new  JSONArray(s);
 
 
-                    data.setText(s);
+
+
+                    JSONArray root = new JSONArray(s);
+
+
+                   // String json = root.toString();
+                    //s.getBytes(StandardCharsets.UTF_8);
+
+
+                   data.setText(s);
+
+
+
+
                 }
 
                 catch (JSONException e) {
@@ -108,7 +162,7 @@ public class Test extends AppCompatActivity {
     ArrayList<ArrayList<String>> quizArray = new ArrayList<>();
 
 
-    String quizData[][] = {
+ String quizData[][] = {
             // {"Country", "Right Answer", "Choice1", "Choice2", "Choice3"}
             {"Какой препроцессор максимально минимизирует написание кода CSS ", "Stylus", "Sass", "Less"},
             {"Какое свойство не поддерживается устаревшими версиями браузеров? ", "flex", "padding", "font-decoration"},
@@ -133,10 +187,8 @@ public class Test extends AppCompatActivity {
         BackGround b = new BackGround();
         b.execute();
 
+
         data = (TextView)findViewById(R.id.data);
-
-
-
 
 
         countLabel = (TextView)findViewById(R.id.countLabel);
