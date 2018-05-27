@@ -52,26 +52,27 @@ public class Test extends AppCompatActivity {
 
     private String str = "";
 
+
     private int rightAnswerCount = 0;
     private int quizCount = 1;
     static final private int QUIZ_COUNT = 10;
 
-    String singleParsed ;
+
+
+    String vopr;
+
+    String otv1;
+    String otv2;
+    String otv3;
+
 
     public  static TextView data;
 
 
 
+    ArrayList<ArrayList<String>> quizArray = new ArrayList<>();
 
-    private final Charset UTF8_CHARSET = Charset.forName("UTF-8");
 
-    String decodeUTF8(byte[] bytes) {
-        return new String(bytes, UTF8_CHARSET);
-    }
-
-    byte[] encodeUTF8(String string) {
-        return string.getBytes(UTF8_CHARSET);
-    }
 
 
     class BackGround extends AsyncTask<String, String, String> {
@@ -90,16 +91,7 @@ public class Test extends AppCompatActivity {
 
             try {
 
-
-              /*  String json = ("https://diplomandroid.000webhostapp.com/test.php") ;
-                final String encodedURL = URLEncoder.encode(json, "UTF-8");
-                URL url = new URL(encodedURL);*/
-
-
-
                 URL url = new URL("https://diplomandroid.000webhostapp.com/test.php");
-
-
 
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -126,27 +118,54 @@ public class Test extends AppCompatActivity {
         @Override
             protected void onPostExecute(String s) {
 
-
-
-          //  s = URLDecoder.decode(URLEncoder.encode(s, "iso8859-1"),"UTF-8");
-
-
                 try {
-
-
-
 
                     JSONArray root = new JSONArray(s);
 
 
                    // String json = root.toString();
                     //s.getBytes(StandardCharsets.UTF_8);
+                    //str = s;
+
+                   //data.setText(s);
+
+                   // JSONArray JA = new JSONArray(data);
 
 
-                   data.setText(s);
+                 for(int i =0 ;i <root.length(); i++){
+
+                        JSONObject JO = root.getJSONObject(i);
+
+                        vopr = JO.getString("vopr");
+                        otv1 = JO.getString("otv1");
+                        otv2 = JO.getString("otv2");
+                        otv3 = JO.getString("otv3");
+
+                    }
+
+                    //data.setText(otv1);
 
 
 
+                    String quizData[][] = {
+                            { vopr, otv1, otv2 ,otv3 }
+
+
+                    };
+                    for (int i = 0; i < quizData.length; i++) {
+                        // Prepare array.
+                        ArrayList<String> tmpArray = new ArrayList<>();
+                        tmpArray.add(quizData[i][0]);  // Country
+                        tmpArray.add(quizData[i][1]);  // Right Answer
+                        tmpArray.add(quizData[i][2]);  // Choice1
+                        tmpArray.add(quizData[i][3]);  // Choice2
+                        //tmpArray.add(quizData[i][4]);  // Choice3
+
+                        // Add tmpArray to quizArray.
+                        quizArray.add(tmpArray);
+                    }
+
+                    showNextQuiz();
 
                 }
 
@@ -159,23 +178,6 @@ public class Test extends AppCompatActivity {
     }
 
 
-    ArrayList<ArrayList<String>> quizArray = new ArrayList<>();
-
-
- String quizData[][] = {
-            // {"Country", "Right Answer", "Choice1", "Choice2", "Choice3"}
-            {"Какой препроцессор максимально минимизирует написание кода CSS ", "Stylus", "Sass", "Less"},
-            {"Какое свойство не поддерживается устаревшими версиями браузеров? ", "flex", "padding", "font-decoration"},
-            {"До скольки столбцов максимально масштабируется система разметки Bootstrap?", "12", "6", "3"},
-            {"Для каких размеров экрана предназначен класс префикса \"sm\" в Bootstrap?", "<768px", ">=768px", ">=992px"},
-            {"Какой атрибут имеет самый высокий приоритет?", "style", "class", "id"},
-            {"С какого символа обьявляются переменные в препроцессоре Sass?", "$", "@", "#"},
-            {"Что используется в Jade для определения вложенности тегов?", "Табуляция", "Символ \"-\"", "Фигурные скобки"},
-            {"Каким образом принято вызывать миксины в Jade?", "Символ \"+\"", "Символ \"@\"", "Ключевое слово \"mixin\""},
-            {"Выберите правильный способ задания имени БЭМ-модификатору", "block__item-red", "block=item/red", "block__item/red"},
-            {"Каково назначение плагина gulp-watch?", "Отслеживание изменений", "Конкатенация файлов", "Очистка каталога"}
-
-    };
 
 
     @Override
@@ -199,20 +201,7 @@ public class Test extends AppCompatActivity {
         // answerBtn4 = (Button)findViewById(R.id.answerBtn4);
 
         // Create quizArray from quizData.
-        for (int i = 0; i < quizData.length; i++) {
-            // Prepare array.
-            ArrayList<String> tmpArray = new ArrayList<>();
-            tmpArray.add(quizData[i][0]);  // Country
-            tmpArray.add(quizData[i][1]);  // Right Answer
-            tmpArray.add(quizData[i][2]);  // Choice1
-            tmpArray.add(quizData[i][3]);  // Choice2
-            //tmpArray.add(quizData[i][4]);  // Choice3
 
-            // Add tmpArray to quizArray.
-            quizArray.add(tmpArray);
-        }
-
-        showNextQuiz();
 
     }
 
