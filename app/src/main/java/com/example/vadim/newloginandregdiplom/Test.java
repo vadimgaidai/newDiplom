@@ -70,8 +70,8 @@ public class Test extends AppCompatActivity {
 
 
 
-    ArrayList<ArrayList<String>> quizArray = new ArrayList<>();
 
+    ArrayList<ArrayList<String>> quizArray = new ArrayList<>();
 
 
 
@@ -116,63 +116,74 @@ public class Test extends AppCompatActivity {
         }
 
         @Override
-            protected void onPostExecute(String s) {
+        protected void onPostExecute(String s) {
 
-                try {
+            try {
 
-                    JSONArray root = new JSONArray(s);
-
-
-                   // String json = root.toString();
-                    //s.getBytes(StandardCharsets.UTF_8);
-                    //str = s;
-
-                   //data.setText(s);
-
-                   // JSONArray JA = new JSONArray(data);
+                JSONArray root = new JSONArray(s);
 
 
-                 for(int i =0 ;i <root.length(); i++){
+                // String json = root.toString();
+                //s.getBytes(StandardCharsets.UTF_8);
+                //str = s;
+
+                //data.setText(s);
+
+                // JSONArray JA = new JSONArray(data);
+
+
+                    for (int i = 0; i < root.length(); i++) {
 
                         JSONObject JO = root.getJSONObject(i);
+
 
                         vopr = JO.getString("vopr");
                         otv1 = JO.getString("otv1");
                         otv2 = JO.getString("otv2");
                         otv3 = JO.getString("otv3");
 
+
+
+
+
+
                     }
+                String quizData[][] = {
+                        { vopr, otv1, otv2 ,otv3 },
+                        { vopr, otv1, otv2 ,otv3 },
+                        { vopr, otv1, otv2 ,otv3 },
+                        { vopr, otv1, otv2 ,otv3 },
+                        { vopr, otv1, otv2 ,otv3 },
+                        { vopr, otv1, otv2 ,otv3 },
+                        { vopr, otv1, otv2 ,otv3 },
+                        { vopr, otv1, otv2 ,otv3 },
+                        { vopr, otv1, otv2 ,otv3 },
+                        { vopr, otv1, otv2 ,otv3 }
 
-                    //data.setText(otv1);
 
+                };
+                for (int i = 0; i < quizData.length; i++) {
+                    // Prepare array.
+                    ArrayList<String> tmpArray = new ArrayList<>();
+                    tmpArray.add(quizData[i][0]);  // Country
+                    tmpArray.add(quizData[i][1]);  // Right Answer
+                    tmpArray.add(quizData[i][2]);  // Choice1
+                    tmpArray.add(quizData[i][3]);  // Choice2
+                    //tmpArray.add(quizData[i][4]);  // Choice3
 
-
-                    String quizData[][] = {
-                            { vopr, otv1, otv2 ,otv3 }
-
-
-                    };
-                    for (int i = 0; i < quizData.length; i++) {
-                        // Prepare array.
-                        ArrayList<String> tmpArray = new ArrayList<>();
-                        tmpArray.add(quizData[i][0]);  // Country
-                        tmpArray.add(quizData[i][1]);  // Right Answer
-                        tmpArray.add(quizData[i][2]);  // Choice1
-                        tmpArray.add(quizData[i][3]);  // Choice2
-                        //tmpArray.add(quizData[i][4]);  // Choice3
-
-                        // Add tmpArray to quizArray.
-                        quizArray.add(tmpArray);
-                    }
-
-                    showNextQuiz();
-
+                    // Add tmpArray to quizArray.
+                    quizArray.add(tmpArray);
                 }
 
-                catch (JSONException e) {
-                    e.printStackTrace();
+                showNextQuiz();
 
-                }
+
+            }
+
+            catch (JSONException e) {
+                e.printStackTrace();
+
+            }
 
         }
     }
@@ -211,11 +222,19 @@ public class Test extends AppCompatActivity {
         countLabel.setText("Вопрос " + quizCount);
 
         // Generate random number between 0 and 14 (quizArray's size - 1).
-        Random random = new Random();
+       Random random =  new Random();
         int randomNum = random.nextInt(quizArray.size());
 
+
         // Pick one quiz set.
-        ArrayList<String> quiz = quizArray.get(randomNum);
+        //ArrayList<ArrayList<String>> quizArray = new ArrayList<>()
+       // ArrayList<String> quiz = quizArray.get(randomNum);
+        //ArrayList<String> quiz = quizArray.get(randomNum);
+
+
+
+        ArrayList<String> quiz = quizArray.get( randomNum);
+
 
         // Set question and right answer.
         // Array format: {"Country", "Right Answer", "Choice1", "Choice2", "Choice3"}
@@ -262,6 +281,7 @@ public class Test extends AppCompatActivity {
             quizCount++;
             showNextQuiz();
         }
+
 
 
 
