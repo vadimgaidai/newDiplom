@@ -55,6 +55,7 @@ public class Test extends AppCompatActivity {
 
     private int rightAnswerCount = 0;
     private int quizCount = 1;
+    private int quizLength = 1;
     static final private int QUIZ_COUNT = 10;
 
 
@@ -91,7 +92,7 @@ public class Test extends AppCompatActivity {
 
             try {
 
-                URL url = new URL("https://diplomandroid.000webhostapp.com/test.php");
+                URL url = new URL("https://diplomandroid.000webhostapp.com/vadik.php");
 
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -132,50 +133,50 @@ public class Test extends AppCompatActivity {
                 // JSONArray JA = new JSONArray(data);
 
 
-                    for (int i = 0; i < root.length(); i++) {
+                for (int i = 0; i < root.length(); i++) {
 
-                        JSONObject JO = root.getJSONObject(i);
-
-
-                        vopr = JO.getString("vopr");
-                        otv1 = JO.getString("otv1");
-                        otv2 = JO.getString("otv2");
-                        otv3 = JO.getString("otv3");
+                    JSONObject JO = root.getJSONObject(i);
 
 
+                    vopr = JO.getString("vopr");
+                    otv1 = JO.getString("otv1");
+                    otv2 = JO.getString("otv2");
+                    otv3 = JO.getString("otv3");
 
 
 
+                    String quizData[][] = {
+                            { vopr, otv1, otv2 ,otv3 },
+                            { vopr, otv1, otv2 ,otv3 },
+                            { vopr, otv1, otv2 ,otv3 },
+                            { vopr, otv1, otv2 ,otv3 },
+                            { vopr, otv1, otv2 ,otv3 },
+                            { vopr, otv1, otv2 ,otv3 },
+                            { vopr, otv1, otv2 ,otv3 },
+                            { vopr, otv1, otv2 ,otv3 },
+                            { vopr, otv1, otv2 ,otv3 },
+                            { vopr, otv1, otv2 ,otv3 }
 
+
+                    };
+                    for (int j = 0; j < quizData.length; j++) {
+                        // Prepare array.
+                        ArrayList<String> tmpArray = new ArrayList<>();
+                        tmpArray.add(quizData[j][0]);  // Country
+                        tmpArray.add(quizData[j][1]);  // Right Answer
+                        tmpArray.add(quizData[j][2]);  // Choice1
+                        tmpArray.add(quizData[j][3]);  // Choice2
+                        //tmpArray.add(quizData[i][4]);  // Choice3
+
+                        // Add tmpArray to quizArray.
+                        quizArray.add(tmpArray);
                     }
-                String quizData[][] = {
-                        { vopr, otv1, otv2 ,otv3 },
-                        { vopr, otv1, otv2 ,otv3 },
-                        { vopr, otv1, otv2 ,otv3 },
-                        { vopr, otv1, otv2 ,otv3 },
-                        { vopr, otv1, otv2 ,otv3 },
-                        { vopr, otv1, otv2 ,otv3 },
-                        { vopr, otv1, otv2 ,otv3 },
-                        { vopr, otv1, otv2 ,otv3 },
-                        { vopr, otv1, otv2 ,otv3 },
-                        { vopr, otv1, otv2 ,otv3 }
+
+                    showNextQuiz();
 
 
-                };
-                for (int i = 0; i < quizData.length; i++) {
-                    // Prepare array.
-                    ArrayList<String> tmpArray = new ArrayList<>();
-                    tmpArray.add(quizData[i][0]);  // Country
-                    tmpArray.add(quizData[i][1]);  // Right Answer
-                    tmpArray.add(quizData[i][2]);  // Choice1
-                    tmpArray.add(quizData[i][3]);  // Choice2
-                    //tmpArray.add(quizData[i][4]);  // Choice3
-
-                    // Add tmpArray to quizArray.
-                    quizArray.add(tmpArray);
                 }
 
-                showNextQuiz();
 
 
             }
@@ -222,18 +223,25 @@ public class Test extends AppCompatActivity {
         countLabel.setText("Вопрос " + quizCount);
 
         // Generate random number between 0 and 14 (quizArray's size - 1).
+
+
+
        Random random =  new Random();
         int randomNum = random.nextInt(quizArray.size());
 
 
         // Pick one quiz set.
         //ArrayList<ArrayList<String>> quizArray = new ArrayList<>()
-       // ArrayList<String> quiz = quizArray.get(randomNum);
+        // ArrayList<String> quiz = quizArray.get(randomNum);
         //ArrayList<String> quiz = quizArray.get(randomNum);
 
 
+        ArrayList<String> quiz = quizArray.get(randomNum);
 
-        ArrayList<String> quiz = quizArray.get( randomNum);
+
+
+
+
 
 
         // Set question and right answer.
