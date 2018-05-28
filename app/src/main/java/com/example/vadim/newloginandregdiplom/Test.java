@@ -243,7 +243,6 @@ public class Test extends AppCompatActivity {
 
 
 
-
         // Set question and right answer.
         // Array format: {"Country", "Right Answer", "Choice1", "Choice2", "Choice3"}
         questionLabel.setText(quiz.get(0));
