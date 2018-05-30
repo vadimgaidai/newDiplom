@@ -60,11 +60,58 @@ public class Test extends AppCompatActivity {
 
 
 
-    String vopr;
+    String vopr1;
+    String vopr2;
+    String vopr3;
+    String vopr4;
+    String vopr5;
+    String vopr6;
+    String vopr7;
+    String vopr8;
+    String vopr9;
+    String vopr10;
 
-    String otv1;
-    String otv2;
-    String otv3;
+    String otv1_1;
+    String otv1_2;
+    String otv1_3;
+
+    String otv2_1;
+    String otv2_2;
+    String otv2_3;
+
+    String otv3_1;
+    String otv3_2;
+    String otv3_3;
+
+    String otv4_1;
+    String otv4_2;
+    String otv4_3;
+
+    String otv5_1;
+    String otv5_2;
+    String otv5_3;
+
+    String otv6_1;
+    String otv6_2;
+    String otv6_3;
+
+    String otv7_1;
+    String otv7_2;
+    String otv7_3;
+
+    String otv8_1;
+    String otv8_2;
+    String otv8_3;
+
+    String otv9_1;
+    String otv9_2;
+    String otv9_3;
+
+    String otv10_1;
+    String otv10_2;
+    String otv10_3;
+
+
 
 
     public  static TextView data;
@@ -121,61 +168,104 @@ public class Test extends AppCompatActivity {
 
             try {
 
-                JSONArray root = new JSONArray(s);
+
+                JSONObject root = new JSONObject(s);
+                JSONObject vopr_1 = root.getJSONObject("1");
+                JSONObject vopr_2 = root.getJSONObject("2");
+                JSONObject vopr_3 = root.getJSONObject("3");
+                JSONObject vopr_4 = root.getJSONObject("4");
+                JSONObject vopr_5 = root.getJSONObject("5");
+                JSONObject vopr_6 = root.getJSONObject("6");
+                JSONObject vopr_7 = root.getJSONObject("7");
+                JSONObject vopr_8 = root.getJSONObject("8");
+                JSONObject vopr_9 = root.getJSONObject("9");
+                JSONObject vopr_10 = root.getJSONObject("10");
+
+                vopr1 = vopr_1.getString("vopr");
+                otv1_1 = vopr_1.getString("otv1");
+                otv1_2 = vopr_1.getString("otv2");
+                otv1_3 = vopr_1.getString("otv3");
+
+                vopr2 = vopr_2.getString("vopr");
+                otv2_1 = vopr_2.getString("otv1");
+                otv2_2 = vopr_2.getString("otv2");
+                otv2_3 = vopr_2.getString("otv3");
 
 
-                // String json = root.toString();
-                //s.getBytes(StandardCharsets.UTF_8);
-                //str = s;
-
-                //data.setText(s);
-
-                // JSONArray JA = new JSONArray(data);
+                vopr3 = vopr_3.getString("vopr");
+                otv3_1 = vopr_3.getString("otv1");
+                otv3_2 = vopr_3.getString("otv2");
+                otv3_3 = vopr_3.getString("otv3");
 
 
-                for (int i = 0; i < root.length(); i++) {
+                vopr4 = vopr_4.getString("vopr");
+                otv4_1 = vopr_4.getString("otv1");
+                otv4_2 = vopr_4.getString("otv2");
+                otv4_3 = vopr_4.getString("otv3");
 
-                    JSONObject JO = root.getJSONObject(i);
+                vopr5 = vopr_5.getString("vopr");
+                otv5_1 = vopr_5.getString("otv1");
+                otv5_2 = vopr_5.getString("otv2");
+                otv5_3 = vopr_5.getString("otv3");
 
-
-                    vopr = JO.getString("vopr");
-                    otv1 = JO.getString("otv1");
-                    otv2 = JO.getString("otv2");
-                    otv3 = JO.getString("otv3");
-
-
-
-                    String quizData[][] = {
-                            { vopr, otv1, otv2 ,otv3 },
-                            { vopr, otv1, otv2 ,otv3 },
-                            { vopr, otv1, otv2 ,otv3 },
-                            { vopr, otv1, otv2 ,otv3 },
-                            { vopr, otv1, otv2 ,otv3 },
-                            { vopr, otv1, otv2 ,otv3 },
-                            { vopr, otv1, otv2 ,otv3 },
-                            { vopr, otv1, otv2 ,otv3 },
-                            { vopr, otv1, otv2 ,otv3 },
-                            { vopr, otv1, otv2 ,otv3 }
+                vopr6 = vopr_6.getString("vopr");
+                otv6_1 = vopr_6.getString("otv1");
+                otv6_2 = vopr_6.getString("otv2");
+                otv6_3 = vopr_6.getString("otv3");
 
 
-                    };
-                    for (int j = 0; j < quizData.length; j++) {
-                        // Prepare array.
-                        ArrayList<String> tmpArray = new ArrayList<>();
-                        tmpArray.add(quizData[j][0]);  // Country
-                        tmpArray.add(quizData[j][1]);  // Right Answer
-                        tmpArray.add(quizData[j][2]);  // Choice1
-                        tmpArray.add(quizData[j][3]);  // Choice2
-                        //tmpArray.add(quizData[i][4]);  // Choice3
-
-                        // Add tmpArray to quizArray.
-                        quizArray.add(tmpArray);
-                    }
-
-                    showNextQuiz();
+                vopr7 = vopr_7.getString("vopr");
+                otv7_1 = vopr_7.getString("otv1");
+                otv7_2 = vopr_7.getString("otv2");
+                otv7_3 = vopr_7.getString("otv3");
 
 
+                vopr8 = vopr_8.getString("vopr");
+                otv8_1 = vopr_8.getString("otv1");
+                otv8_2 = vopr_8.getString("otv2");
+                otv8_3 = vopr_8.getString("otv3");
+
+                vopr9 = vopr_9.getString("vopr");
+                otv9_1 = vopr_9.getString("otv1");
+                otv9_2 = vopr_9.getString("otv2");
+                otv9_3 = vopr_9.getString("otv3");
+
+                vopr10 = vopr_10.getString("vopr");
+                otv10_1 = vopr_10.getString("otv1");
+                otv10_2 = vopr_10.getString("otv2");
+                otv10_3 = vopr_10.getString("otv3");
+
+
+
+                String quizData[][] = {
+                        { vopr1, otv1_1, otv1_2 ,otv1_3 },
+                        { vopr2, otv2_1, otv2_2 ,otv2_3 },
+                        { vopr3, otv3_1, otv3_2 ,otv3_3 },
+                        { vopr4, otv4_1, otv4_2 ,otv4_3 },
+                        { vopr5, otv5_1, otv5_2 ,otv5_3 },
+                        { vopr6, otv6_1, otv6_2 ,otv6_3 },
+                        { vopr7, otv7_1, otv7_2 ,otv7_3 },
+                        { vopr8, otv8_1, otv8_2 ,otv8_3 },
+                        { vopr9, otv9_1, otv9_2 ,otv9_3 },
+                        { vopr10, otv10_1, otv10_2 ,otv10_3 }
+
+                };
+                for (int j = 0; j < quizData.length; j++) {
+                    // Prepare array.
+                    ArrayList<String> tmpArray = new ArrayList<>();
+                    tmpArray.add(quizData[j][0]);  // Country
+                    tmpArray.add(quizData[j][1]);  // Right Answer
+                    tmpArray.add(quizData[j][2]);  // Choice1
+                    tmpArray.add(quizData[j][3]);  // Choice2
+                    //tmpArray.add(quizData[i][4]);  // Choice3
+
+                    // Add tmpArray to quizArray.
+                    quizArray.add(tmpArray);
                 }
+
+                showNextQuiz();
+
+
 
 
 
@@ -227,19 +317,10 @@ public class Test extends AppCompatActivity {
 
 
        Random random =  new Random();
-        int randomNum = random.nextInt(quizArray.size());
-
-
-        // Pick one quiz set.
-        //ArrayList<ArrayList<String>> quizArray = new ArrayList<>()
-        // ArrayList<String> quiz = quizArray.get(randomNum);
-        //ArrayList<String> quiz = quizArray.get(randomNum);
+       int randomNum = random.nextInt(quizArray.size());
 
 
         ArrayList<String> quiz = quizArray.get(randomNum);
-
-
-
 
 
 
