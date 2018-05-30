@@ -1,11 +1,10 @@
 package com.example.vadim.newloginandregdiplom;
 
 
-import android.app.AlertDialog;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,20 +21,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 
 import java.net.URL;
 
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import java.util.Collections;
 import java.util.Random;
-import java.nio.charset.Charset;
+
 
 
 
@@ -55,7 +50,6 @@ public class Test extends AppCompatActivity {
 
     private int rightAnswerCount = 0;
     private int quizCount = 1;
-    private int quizLength = 1;
     static final private int QUIZ_COUNT = 10;
 
 
@@ -127,7 +121,16 @@ public class Test extends AppCompatActivity {
 
         ProgressDialog pdLoading = new ProgressDialog(Test.this);
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
 
+            //this method will be running on UI thread
+            pdLoading.setMessage("\tLoading...");
+            pdLoading.setCancelable(false);
+            pdLoading.show();
+
+        }
 
         @Override
         protected String doInBackground(String ... params) {
@@ -165,6 +168,8 @@ public class Test extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+
+            pdLoading.dismiss();
 
             try {
 
@@ -265,10 +270,6 @@ public class Test extends AppCompatActivity {
 
                 showNextQuiz();
 
-
-
-
-
             }
 
             catch (JSONException e) {
@@ -290,9 +291,6 @@ public class Test extends AppCompatActivity {
 
         BackGround b = new BackGround();
         b.execute();
-
-
-        data = (TextView)findViewById(R.id.data);
 
 
         countLabel = (TextView)findViewById(R.id.countLabel);

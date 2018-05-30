@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -40,7 +41,6 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginBottom="8dp"
-        android:text="Question"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="24sp"
@@ -49,7 +49,6 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countLabel" />
-
 
 
     <Button
@@ -61,7 +60,6 @@
         android:layout_marginStart="8dp"
         android:background="@color/colorAccent"
         android:onClick="checkAnswer"
-        android:text="answer1"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/answerBtn2"
@@ -77,7 +75,6 @@
         android:layout_marginStart="8dp"
         android:background="@color/colorAccent"
         android:onClick="checkAnswer"
-        android:text="answer2"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/answerBtn3"
@@ -94,27 +91,12 @@
         android:layout_marginStart="8dp"
         android:background="@color/colorAccent"
         android:onClick="checkAnswer"
-        android:text="answer3"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/questionLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countLabel" />
 
 
 </android.support.constraint.ConstraintLayout>
