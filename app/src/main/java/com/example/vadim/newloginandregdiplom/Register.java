@@ -40,27 +40,35 @@ public class Register extends Activity {
         Password = password.getText().toString();
 
         if (Name.length() == 0 | Password.length() == 0) {
-            Toast.makeText(getApplicationContext(), "Заполните все поля ввода",
-                    Toast.LENGTH_LONG).show();
+
+            es.dmoral.toasty.Toasty.warning(getApplicationContext(), "Заполните все поля ввода.",
+            Toast.LENGTH_SHORT, true).show();
+
             return;
 
         }
         if (Name.length() <= 2) {
-            Toast.makeText(getApplicationContext(), "Username должен состоять как минимум из 3 символов",
-                    Toast.LENGTH_LONG).show();
+
+             es.dmoral.toasty.Toasty.warning(getApplicationContext(), "Username должен состоять как минимум из 3 символов.",
+             Toast.LENGTH_SHORT, true).show();
+
             return;
 
         }
         if (Password.length() <= 4) {
-            Toast.makeText(getApplicationContext(), "Password должен состоять как минимум из 5 символов",
-                    Toast.LENGTH_LONG).show();
+
+             es.dmoral.toasty.Toasty.warning(getApplicationContext(), "Password должен состоять как минимум из 5 символов",
+             Toast.LENGTH_SHORT, true).show();
+
             return;
 
         }
 
         if (Name.length() >= 16 | Password.length() >= 16) {
-            Toast.makeText(getApplicationContext(), "Значения Password и Username не должны привышать 16 символов",
-                    Toast.LENGTH_LONG).show();
+
+             es.dmoral.toasty.Toasty.warning(getApplicationContext(), "Значения Password и Username не должны привышать 16 символов",
+             Toast.LENGTH_SHORT, true).show();
+
             return;
 
         }
@@ -85,7 +93,7 @@ public class Register extends Activity {
             try {
 
 
-                URL url = new URL("https://diplomandroid.000webhostapp.com/Register.php");
+                URL url = new URL("https://diplomandroid.000webhostapp.com/Register2.php");
                 String urlParams = "name="+name+"&password="+password;
 
 
@@ -117,8 +125,11 @@ public class Register extends Activity {
         protected void onPostExecute(String s) {
             if(s.equals("")){
                 s="Регистрация прошла успешно.";
+                es.dmoral.toasty.Toasty.success(ctx, s, Toast.LENGTH_LONG).show();
             }
-            Toast.makeText(ctx, s, Toast.LENGTH_LONG).show();
+            else{
+                 es.dmoral.toasty.Toasty.error(ctx, s, Toast.LENGTH_LONG).show();
+            }
         }
     }
 

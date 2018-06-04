@@ -169,12 +169,13 @@ public class Test extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
 
-            pdLoading.dismiss();
 
+            pdLoading.dismiss();
             try {
 
 
                 JSONObject root = new JSONObject(s);
+
                 JSONObject vopr_1 = root.getJSONObject("1");
                 JSONObject vopr_2 = root.getJSONObject("2");
                 JSONObject vopr_3 = root.getJSONObject("3");
@@ -242,6 +243,7 @@ public class Test extends AppCompatActivity {
 
 
 
+
                 String quizData[][] = {
                         { vopr1, otv1_1, otv1_2 ,otv1_3 },
                         { vopr2, otv2_1, otv2_2 ,otv2_3 },
@@ -255,6 +257,7 @@ public class Test extends AppCompatActivity {
                         { vopr10, otv10_1, otv10_2 ,otv10_3 }
 
                 };
+
                 for (int j = 0; j < quizData.length; j++) {
                     // Prepare array.
                     ArrayList<String> tmpArray = new ArrayList<>();
@@ -268,6 +271,8 @@ public class Test extends AppCompatActivity {
                     quizArray.add(tmpArray);
                 }
 
+
+
                 showNextQuiz();
 
             }
@@ -277,7 +282,9 @@ public class Test extends AppCompatActivity {
 
             }
 
+
         }
+
     }
 
 

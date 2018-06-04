@@ -3,7 +3,7 @@ package com.example.vadim.newloginandregdiplom;
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -54,8 +54,10 @@ public class Main extends Activity {
         Name = name.getText().toString();
         Password = password.getText().toString();
         if (Name.length() == 0 | Password.length() == 0) {
-            Toast.makeText(getApplicationContext(), "Заполните все поля ввода",
-                    Toast.LENGTH_LONG).show();
+
+            es.dmoral.toasty.Toasty.warning(getApplicationContext(), "Заполните все поля ввода.",
+            Toast.LENGTH_SHORT, true).show();
+
             return;
 
         }else{ BackGround b = new BackGround();
@@ -148,11 +150,11 @@ public class Main extends Activity {
             catch (JSONException e) {
                 e.printStackTrace();
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
-                builder.setMessage("Неправильный логин или пароль")
-                        .setNegativeButton("Закрыть", null)
-                        .create()
-                        .show();
+                es.dmoral.toasty.Toasty.error(getApplicationContext(), "Неправильный логин или пароль.",
+                Toast.LENGTH_SHORT, true).show();
+
+                return;
+
 
             }
 
