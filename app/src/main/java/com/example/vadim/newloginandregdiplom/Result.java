@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class ResultActivity extends AppCompatActivity {
+public class Result extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +25,22 @@ public class ResultActivity extends AppCompatActivity {
         int totalScore = settings.getInt("totalScore", 0);
 
 
-        totalScore += score * 10;
+        //totalScore += score * 10;
 
         resultLabel.setText(score + " / 10");
 
-        totalScoreLabel.setText("Количество баллов: " + totalScore);
+        if( score >= 0 && score <= 4){
+            totalScoreLabel.setText("Минимальный уровень знаний");
+        }
+        if( score >= 5 && score <= 8){
+            totalScoreLabel.setText("Средний уровень знаний");
+        }
+        if( score >= 9){
+            totalScoreLabel.setText("Высокий уровень знаний");
+        }
+
+
+        //totalScoreLabel.setText("Количество баллов: " + totalScore);
 
         //Update total score.
        // SharedPreferences.Editor editor = settings.edit();

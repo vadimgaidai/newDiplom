@@ -366,7 +366,7 @@ public class Test extends AppCompatActivity {
 
         if (quizCount == QUIZ_COUNT) {
             // Show Result.
-            Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+            Intent intent = new Intent(getApplicationContext(), Result.class);
             intent.putExtra("RIGHT_ANSWER_COUNT", rightAnswerCount);
             startActivity(intent);
 

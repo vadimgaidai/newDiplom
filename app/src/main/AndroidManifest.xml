@@ -33,7 +33,7 @@
             android:name=".Test"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ResultActivity"
+            android:name=".Result"
             android:screenOrientation="portrait">
         </activity>
     </application>
