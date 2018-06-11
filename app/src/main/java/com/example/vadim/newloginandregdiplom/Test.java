@@ -1,7 +1,5 @@
 package com.example.vadim.newloginandregdiplom;
 
-
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 
@@ -12,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import org.json.JSONException;
@@ -31,8 +30,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-
-
+import es.dmoral.toasty.Toasty;
 
 public class Test extends AppCompatActivity {
 
@@ -41,18 +39,13 @@ public class Test extends AppCompatActivity {
     private Button answerBtn1;
     private Button answerBtn2;
     private Button answerBtn3;
-    // private Button answerBtn4;
 
     private String rightAnswer;
-
-    private String str = "";
-
+    String str="";
 
     private int rightAnswerCount = 0;
     private int quizCount = 1;
     static final private int QUIZ_COUNT = 10;
-
-
 
     String vopr1;
     String vopr2;
@@ -106,16 +99,10 @@ public class Test extends AppCompatActivity {
     String otv10_3;
 
 
-
-
     public  static TextView data;
 
 
-
-
     ArrayList<ArrayList<String>> quizArray = new ArrayList<>();
-
-
 
     class BackGround extends AsyncTask<String, String, String> {
 
@@ -129,21 +116,17 @@ public class Test extends AppCompatActivity {
             pdLoading.setMessage("\tLoading...");
             pdLoading.setCancelable(false);
             pdLoading.show();
-
         }
 
         @Override
         protected String doInBackground(String ... params) {
 
             String data="";
-
-
             int tmp;
 
             try {
 
                 URL url = new URL("https://diplomandroid.000webhostapp.com/vadik.php");
-
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = httpURLConnection.getInputStream();
@@ -157,22 +140,21 @@ public class Test extends AppCompatActivity {
 
                 return data;
 
+
             } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return "Ошибка: "+e.getMessage();
+                str = "Возможны неполадки подключения к серверу.";
+                return str;
             } catch (IOException e) {
-                e.printStackTrace();
-                return "Ошибка: "+e.getMessage();
+                str= "Возможны неполадки подключения к серверу.";
+                return str;
             }
         }
 
         @Override
         protected void onPostExecute(String s) {
 
-
             pdLoading.dismiss();
             try {
-
 
                 JSONObject root = new JSONObject(s);
 
@@ -241,9 +223,6 @@ public class Test extends AppCompatActivity {
                 otv10_2 = vopr_10.getString("otv2");
                 otv10_3 = vopr_10.getString("otv3");
 
-
-
-
                 String quizData[][] = {
                         { vopr1, otv1_1, otv1_2 ,otv1_3 },
                         { vopr2, otv2_1, otv2_2 ,otv2_3 },
@@ -259,110 +238,82 @@ public class Test extends AppCompatActivity {
                 };
 
                 for (int j = 0; j < quizData.length; j++) {
-                    // Prepare array.
-                    ArrayList<String> tmpArray = new ArrayList<>();
-                    tmpArray.add(quizData[j][0]);  // Country
-                    tmpArray.add(quizData[j][1]);  // Right Answer
-                    tmpArray.add(quizData[j][2]);  // Choice1
-                    tmpArray.add(quizData[j][3]);  // Choice2
-                    //tmpArray.add(quizData[i][4]);  // Choice3
 
-                    // Add tmpArray to quizArray.
+                    ArrayList<String> tmpArray = new ArrayList<>();
+                    tmpArray.add(quizData[j][0]);  // Вопрос
+                    tmpArray.add(quizData[j][1]);  // Правильный ответ
+                    tmpArray.add(quizData[j][2]);  // Ответ
+                    tmpArray.add(quizData[j][3]);  // Ответ
+
                     quizArray.add(tmpArray);
                 }
 
-
-
                 showNextQuiz();
-
             }
 
             catch (JSONException e) {
-                e.printStackTrace();
 
+                Toasty.info(getApplicationContext(), str,
+                        Toast.LENGTH_SHORT, true).show();
             }
-
-
         }
 
     }
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test);
 
-
         BackGround b = new BackGround();
         b.execute();
-
 
         countLabel = (TextView)findViewById(R.id.countLabel);
         questionLabel = (TextView)findViewById(R.id.questionLabel);
         answerBtn1 = (Button)findViewById(R.id.answerBtn1);
         answerBtn2 = (Button)findViewById(R.id.answerBtn2);
         answerBtn3 = (Button)findViewById(R.id.answerBtn3);
-        // answerBtn4 = (Button)findViewById(R.id.answerBtn4);
-
-        // Create quizArray from quizData.
-
-
     }
 
     public void showNextQuiz() {
 
-        // Update quizCountLabel.
         countLabel.setText("Вопрос " + quizCount);
-
-        // Generate random number between 0 and 14 (quizArray's size - 1).
-
-
 
        Random random =  new Random();
        int randomNum = random.nextInt(quizArray.size());
 
-
         ArrayList<String> quiz = quizArray.get(randomNum);
 
 
-
-        // Set question and right answer.
-        // Array format: {"Country", "Right Answer", "Choice1", "Choice2", "Choice3"}
+        // Задаем вопрос и правильный ответ
+        // Формат массива: {вопрос, правильный ответ, ответ, ответ}
         questionLabel.setText(quiz.get(0));
         rightAnswer = quiz.get(1);
 
-        // Remove "Country" from quiz and Shuffle choices.
+        // Удаление вопроса из поелй ответа
         quiz.remove(0);
         Collections.shuffle(quiz);
 
-        // Set Choices.
+        // заносим тескт ответов в кнопки
         answerBtn1.setText(quiz.get(0));
         answerBtn2.setText(quiz.get(1));
         answerBtn3.setText(quiz.get(2));
         //answerBtn4.setText(quiz.get(3));
 
-        // Remove this quiz from quizArray.
+        // удаление вопроса из массива
         quizArray.remove(randomNum);
 
     }
 
     public void checkAnswer(View view) {
 
-        // Get pushed button.
+        // Нажатие на кнопки
         Button answerBtn = (Button) findViewById(view.getId());
         String btnText = answerBtn.getText().toString();
-
-
 
         if(btnText.equals(rightAnswer)) {
             rightAnswerCount++;
         }
-
-
-        // Create Dialog.
 
         if (quizCount == QUIZ_COUNT) {
             // Show Result.
@@ -374,9 +325,6 @@ public class Test extends AppCompatActivity {
             quizCount++;
             showNextQuiz();
         }
-
-
-
 
     }
 }

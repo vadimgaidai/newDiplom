@@ -12,12 +12,9 @@ public class Home extends Activity {
     String name, password, Err;
     TextView nameTV, err;
 
-
-
     public void onClick(View view){
         Intent intent = new Intent(Home.this, Test.class);
         startActivity(intent);
-
 
     }
 
@@ -25,8 +22,6 @@ public class Home extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
-
-
 
         nameTV = (TextView) findViewById(R.id.tvName);
         err = (TextView) findViewById(R.id.err);
@@ -39,7 +34,5 @@ public class Home extends Activity {
 
         nameTV.setText("Привет "+name);
         err.setText(Err);
-
-
     }
 }

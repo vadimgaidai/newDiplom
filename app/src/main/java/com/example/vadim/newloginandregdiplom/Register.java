@@ -17,11 +17,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import es.dmoral.toasty.Toasty;
+
 public class Register extends Activity {
 
     EditText name, password;
     String Name, Password;
     Context ctx=this;
+    String str="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +34,7 @@ public class Register extends Activity {
         name = (EditText) findViewById(R.id.etUsername);
         password = (EditText) findViewById(R.id.etPassword);
 
-
     }
-
 
     public void signOut(View view){
         Name = name.getText().toString();
@@ -45,41 +46,34 @@ public class Register extends Activity {
             Toast.LENGTH_SHORT, true).show();
 
             return;
-
         }
         if (Name.length() <= 2) {
 
-             es.dmoral.toasty.Toasty.warning(getApplicationContext(), "Username должен состоять как минимум из 3 символов.",
+             es.dmoral.toasty.Toasty.warning(getApplicationContext(), "Имя должно состоять как минимум из 3 символов.",
              Toast.LENGTH_SHORT, true).show();
 
             return;
-
         }
         if (Password.length() <= 4) {
 
-             es.dmoral.toasty.Toasty.warning(getApplicationContext(), "Password должен состоять как минимум из 5 символов",
+             es.dmoral.toasty.Toasty.warning(getApplicationContext(), "Пароль должен состоять как минимум из 5 символов",
              Toast.LENGTH_SHORT, true).show();
 
             return;
-
         }
 
         if (Name.length() >= 16 | Password.length() >= 16) {
 
-             es.dmoral.toasty.Toasty.warning(getApplicationContext(), "Значения Password и Username не должны привышать 16 символов",
+             es.dmoral.toasty.Toasty.warning(getApplicationContext(), "Значения имени и пароля не должны привышать 16 символов",
              Toast.LENGTH_SHORT, true).show();
 
             return;
-
         }
         else{
             BackGround b = new BackGround();
             b.execute(Name, Password);
         }
-
     }
-
-
 
     class BackGround extends AsyncTask<String, String, String> {
 
@@ -92,10 +86,8 @@ public class Register extends Activity {
 
             try {
 
-
-                URL url = new URL("https://diplomandroid.000webhostapp.com/Register2.php");
+                URL url = new URL("https://diplomandroid.000webhostapp.com/Rogin.php");
                 String urlParams = "name="+name+"&password="+password;
-
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
@@ -113,24 +105,42 @@ public class Register extends Activity {
                 return data;
 
             } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return "Ошибка: "+e.getMessage();
+                str = "Возможны неполадки подключения к серверу.";
+                return str;
             } catch (IOException e) {
-                e.printStackTrace();
-                return "Ошибка: "+e.getMessage();
+                str= "Возможны неполадки подключения к серверу.";
+                return str;
             }
         }
 
-        @Override
+       /* @Override
         protected void onPostExecute(String s) {
             if(s.equals("")){
                 s="Регистрация прошла успешно.";
                 es.dmoral.toasty.Toasty.success(ctx, s, Toast.LENGTH_LONG).show();
             }
             else{
-                 es.dmoral.toasty.Toasty.error(ctx, s, Toast.LENGTH_LONG).show();
+                es.dmoral.toasty.Toasty.error(ctx, s, Toast.LENGTH_LONG).show();
             }
-        }
+        }*/
+       @Override
+       protected void onPostExecute(String s) {
+           if(s.equals("")){
+               s="Регистрация прошла успешно.";
+           }
+           Toast.makeText(ctx, s, Toast.LENGTH_LONG).show();
+
+         /*  if(str.equals("")){
+               Toasty.error(getApplicationContext(), "Неправильный логин или пароль!",
+                       Toast.LENGTH_SHORT, true).show();
+
+           }else{
+               Toasty.info(getApplicationContext(), str,
+                       Toast.LENGTH_SHORT, true).show();
+           }*/
+
+
+       }
     }
 
 }

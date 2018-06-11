@@ -1,8 +1,8 @@
 package com.example.vadim.newloginandregdiplom;
 
-import android.content.Context;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,12 +21,6 @@ public class Result extends AppCompatActivity {
 
         int score = getIntent().getIntExtra("RIGHT_ANSWER_COUNT", 0);
 
-        SharedPreferences settings = getSharedPreferences("Diplom", Context.MODE_PRIVATE);
-        int totalScore = settings.getInt("totalScore", 0);
-
-
-        //totalScore += score * 10;
-
         resultLabel.setText(score + " / 10");
 
         if( score >= 0 && score <= 4){
@@ -39,13 +33,6 @@ public class Result extends AppCompatActivity {
             totalScoreLabel.setText("Высокий уровень знаний");
         }
 
-
-        //totalScoreLabel.setText("Количество баллов: " + totalScore);
-
-        //Update total score.
-       // SharedPreferences.Editor editor = settings.edit();
-        //editor.putInt("totalScore", totalScore);
-        //editor.commit();
     }
 
     public void returnTop(View view) {

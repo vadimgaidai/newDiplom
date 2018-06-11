@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -23,7 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
+import es.dmoral.toasty.Toasty;
 
 
 public class Main extends Activity {
@@ -32,9 +33,7 @@ public class Main extends Activity {
     String Name, Password;
     Context ctx=this;
     String NAME, PASSWORD;
-
-
-
+    String str="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +41,14 @@ public class Main extends Activity {
         setContentView(R.layout.main);
         name = (EditText) findViewById(R.id.etUsername);
         password = (EditText) findViewById(R.id.etPassword);
+
+
     }
 
     public void goToReg (View v){
+
         startActivity(new Intent(this,Register.class));
     }
-
-
 
     public void signIn (View view){
         Name = name.getText().toString();
@@ -64,18 +64,14 @@ public class Main extends Activity {
             b.execute(Name, Password);
 
         }
-
-
-
     }
-
 
 
     class BackGround extends AsyncTask<String, String, String> {
 
         ProgressDialog pdLoading = new ProgressDialog(Main.this);
 
-        @Override
+       @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
@@ -93,10 +89,8 @@ public class Main extends Activity {
             String data="";
             int tmp;
 
-
-
             try {
-                URL url = new URL("https://diplomandroid.000webhostapp.com/Login.php");
+                URL url = new URL("https://diplomandroid.000webhostapp.com/login.php");
                 String urlParams = "name="+name+"&password="+password;
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -113,15 +107,22 @@ public class Main extends Activity {
 
                 is.close();
                 httpURLConnection.disconnect();
-
                 return data;
+
+
             } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return "Ошибка: "+e.getMessage();
+
+                str = "Возможны неполадки подключения к серверу.";
+                return str;
+
             } catch (IOException e) {
-                e.printStackTrace();
-                return "Ошибка: "+e.getMessage();
+
+                str= "Возможны неполадки подключения к серверу.";
+                return str;
             }
+
+
+
         }
 
         @Override
@@ -129,12 +130,9 @@ public class Main extends Activity {
 
             pdLoading.dismiss();
 
-
-
             try {
                 JSONObject root = new JSONObject(s);
                 JSONObject user_data = root.getJSONObject("user_data");
-
 
                 NAME = user_data.getString("name");
                 PASSWORD = user_data.getString("password");
@@ -146,18 +144,19 @@ public class Main extends Activity {
                 startActivity(i);
 
             }
-
             catch (JSONException e) {
                 e.printStackTrace();
 
-                es.dmoral.toasty.Toasty.error(getApplicationContext(), "Неправильный логин или пароль.",
-                Toast.LENGTH_SHORT, true).show();
+                if(str.equals("")){
+                    Toasty.error(getApplicationContext(), "Неправильный логин или пароль!",
+                            Toast.LENGTH_SHORT, true).show();
 
-                return;
-
+                }else{
+                    Toasty.info(getApplicationContext(), str,
+                            Toast.LENGTH_SHORT, true).show();
+                }
 
             }
-
 
         }
     }
